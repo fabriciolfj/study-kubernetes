@@ -9,21 +9,21 @@ data:
                     application:
                       name: product
                     datasource:
-                      url: jdbc:mysql://mysql/product?createDatabaseIfNotExist=true
-                      username: root
-                      password: ${MYSQL_ROOT_PASSWORD}
+                      url: jdbc:h2:mem:testdb
+                      username: sa
+                      password: password
                     flyway:
                       locations:
                         - classpath:db/migration
                         - classpath:db/testdata
                     jpa:
                       hibernate:
-                        ddl-auto: 'update'
+                        ddl-auto: none
                       properties:
                         hibernate:
-                          dialect: org.hibernate.dialect.MySQL57Dialect
+                          dialect: org.hibernate.dialect.H2Dialect
                       show-sql: true
-                    management:
+                  management:
                     endpoints:
                       web:
                         exposure:
@@ -34,6 +34,6 @@ data:
                           enabled: true
                     endpoint:
                       metrics:
-                        enabled: false
+                        enabled: true
                       prometheus:
                         enabled: true
